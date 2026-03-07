@@ -17,7 +17,7 @@ For ADK to discover and run your agents properly (especially with `adk web`), yo
 
 ```
 parent_folder/
-    agent_folder/         # This is your agent's package directory
+    agent_folder/         # This is your agent's package directory [only a-z A-z 0-9 _ allowed and do not start with numerics]
         __init__.py       # Must import agent.py
         agent.py          # Must define root_agent
         .env              # Environment variables
@@ -31,6 +31,7 @@ parent_folder/
 
 2. **`agent.py`**
    - Must define a variable named `root_agent`
+   - agent name should start with a letter (a-z, A-Z) or an underscore (_), and can only contain letters, digits (0-9), and underscores.
    - This is the entry point that ADK uses to find your agent
 
 3. **Command Location**

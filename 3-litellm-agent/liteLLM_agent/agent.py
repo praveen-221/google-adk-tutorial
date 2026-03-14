@@ -6,8 +6,10 @@ from google.adk.agents import LlmAgent
 
 load_dotenv()
 model = LiteLlm(
-    model = "gemini/gemma-3-27b-it",    # provider/model_name
-    api_key = os.getenv("GOOGLE_API_KEY")
+    # model = "gemini/gemma-3-27b-it",    # provider/model_name
+    # api_key = os.getenv("GOOGLE_API_KEY")
+    model = "openrouter/stepfun/step-3.5-flash:free",    # provider/model_name
+    api_key = os.getenv("OPENROUTER_API_KEY")
 )
 
 def random_city() -> str:
@@ -37,5 +39,5 @@ root_agent = LlmAgent(
         You are a helpful assistant that returns a random city name 
         when user asks only using tools provided
     """,
-    # tools = [random_city]     # gemma can not access tools when used inside LiteLLM 
+    tools = [random_city]     # gemma can not access tools when used inside LiteLLM 
 )

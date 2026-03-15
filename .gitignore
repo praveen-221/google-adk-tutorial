@@ -1,6 +1,9 @@
 # ignore Google ADK artifacts
 .adk/
 
+# ignore sqlite DB
+*.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

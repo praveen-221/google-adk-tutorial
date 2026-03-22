@@ -54,7 +54,7 @@ async def main():
     while True:
         user_input = input(f"{USER_NAME}: ")
 
-        if user_input.lower() in ["exit", "quit"]:
+        if user_input.strip().lower() in ["exit", "quit"]:
             print(f"Ending the conversation with id: {SESSION_ID}, session data is stored in database")
             break
 

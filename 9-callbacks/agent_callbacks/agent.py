@@ -27,15 +27,15 @@ def agent_pre_execute(callback_context: CallbackContext) -> Optional[types.Conte
     else:
         session_state["request_count"] += 1
     
-    session_state["request_start_time"] = start_time
+    session_state["request_start_time"] = start_time.timestamp()
     
     # Log the request
     print("---------- AGENT EXECUTION STARTED ----------")
-    print(f"Request #: {session_state["request_counter"]}")
+    print(f"Request #: {session_state["request_count"]}")
     print(f"Start time: {start_time.strftime("%Y-%m-%d %H:%M:%S")}")
 
     # Print to console
-    print(f"\n[BEFORE CALLBACK] Agent processing request #{session_state["request_counter"]}")
+    print(f"\n[BEFORE CALLBACK] Agent processing request #{session_state["request_count"]}")
 
     return None
 
@@ -55,17 +55,17 @@ def agent_post_execute(callback_context: CallbackContext) -> Optional[types.Cont
     end_time = datetime.now()
     duration = None
     if "request_start_time" in session_state:
-        duration = (end_time - session_state["request_start_time"]).total_seconds()
+        duration = end_time.timestamp() - session_state["request_start_time"]
     
     # Log the completion
     print("---------- AGENT EXECUTION COMPLETED ----------")
-    print(f"Request #: {session_state.get("request_counter", "Unknown")}")
+    print(f"Request #: {session_state.get("request_count", "Unknown")}")
     if duration is not None:
         print(f"Duration: {duration:.2f} seconds")
 
     # Print to console
     print(
-        f"[AFTER CALLBACK] Agent completed request #{session_state.get("request_counter", "Unknown")}"
+        f"[AFTER CALLBACK] Agent completed request #{session_state.get("request_count", "Unknown")}"
     )
     if duration is not None:
         print(f"[AFTER CALLBACK] Processing took {duration:.2f} seconds")

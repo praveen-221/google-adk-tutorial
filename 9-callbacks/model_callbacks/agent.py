@@ -54,7 +54,7 @@ def model_pre_execute(callback_context: CallbackContext, llm_request: LlmRequest
             ) 
         )
     
-    session_state["model_start_time"] = datetime.now()
+    session_state["model_start_time"] = datetime.now().timestamp()
 
     return None
 
@@ -74,7 +74,7 @@ def model_post_execute(callback_context: CallbackContext, llm_response: LlmRespo
     if not llm_response or not llm_response.content or not llm_response.content.parts:
         return None
     
-    model_response = None
+    model_response = ""
     for part in llm_response.content.parts:
         if hasattr(part, "text") and part.text:
             model_response += part.text
@@ -89,20 +89,21 @@ def model_post_execute(callback_context: CallbackContext, llm_response: LlmRespo
     updated_response = model_response
     is_response_modified = False
 
-    for original, replacement in substitutes:
+    for original, replacement in substitutes.items():
         if original in updated_response.lower():
-            updated_response.replace(original, replacement)
-            updated_response.replace(original.capitalize(), replacement.capitalize())
+            updated_response = updated_response.replace(original, replacement)
+            updated_response = updated_response.replace(original.capitalize(), replacement.capitalize())
+            is_response_modified = True
     
     if is_response_modified:
         print(f"Model response modified")
         final_model_response = [copy.deepcopy(part) for part in llm_response.content.parts]
         for i, part in enumerate(final_model_response):
             if hasattr(part, "text") and part.text:
-                print(f"part: {part.text}\nand\ni: {final_model_response[i].text}")
+                # print(f"part: {part.text}\nand\ni: {final_model_response[i].text}")
                 part.text = updated_response
                 # final_model_response[i].text = updated_response
-                print(f"part: {part.text}\nand\ni: {final_model_response[i].text}")
+                # print(f"part: {part.text}\nand\ni: {final_model_response[i].text}")
         return LlmResponse(
             content = types.Content(role = "model", parts = final_model_response)
         )
@@ -114,5 +115,5 @@ root_agent = LlmAgent(
     description="An agent that demonstrates model callbacks for content filtering and logging",
     instruction="You are a helpful assistant. Your job is to answer user questions concisely",
     before_model_callback = model_pre_execute,
-    after_agent_callback = model_post_execute
+    after_model_callback = model_post_execute
 )

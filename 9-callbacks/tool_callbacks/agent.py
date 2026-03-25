@@ -42,13 +42,13 @@ def tool_pre_execute(
         Simple callback that modifies tool arguments or skips the tool call.
     """
     tool_name = tool.name
-    print(f"[Callback] Before tool call for '{tool_name}'")
-    print(f"[Callback] Original args: {args}")
+    print(f"[Before Callback] Before tool call for '{tool_name}'")
+    print(f"[Before Callback] Original args: {args}")
 
     # If someone asks about America, convert to United States
     if tool_name == "get_capital_city" and args.get("country", "").lower() == "america":
         args["country"] = "United States"
-        print(f"[Callback] Modified args: {args}")
+        print(f"[Before Callback] Modified args: {args}")
         return None
 
     # Skip the call completely for restricted countries
@@ -56,7 +56,7 @@ def tool_pre_execute(
         tool_name == "get_capital_city"
         and args.get("country", "").lower() == "restricted"
     ):
-        return {"result": "Access to this information has been restricted."}
+        return {"capital": "Access to this information has been restricted."}
 
     return None
 
@@ -68,17 +68,15 @@ def tool_post_execute(
         Simple callback that modifies the tool response after execution.
     """
     tool_name = tool.name
-    print(f"[Callback] After tool call for '{tool_name}'")
-    print(f"[Callback] Args used: {args}")
-    print(f"[Callback] Original response: {tool_response}")
+    print(f"[After Callback] After tool call for '{tool_name}'")
+    print(f"[After Callback] Args used: {args}")
+    print(f"[After Callback] Original response: {tool_response}")
 
     original_result = tool_response.get("capital", "")
-    print(f"[Callback] Extracted result: '{original_result}'")
+    print(f"[After Callback] Extracted result: '{original_result}'")
 
     # Add a note for any USA capital responses
     if tool_name == "get_capital_city" and "washington" in original_result.lower():
-        print("[Callback] Adding note!")
-
         # Create a modified copy of the response
         modified_response = copy.deepcopy(tool_response)
         modified_response["capital"] = (
@@ -86,7 +84,7 @@ def tool_post_execute(
         )
         modified_response["note_added_by_callback"] = True
 
-        print(f"[Callback] Modified response: {modified_response}")
+        print(f"[After Callback] Modified response: {modified_response}")
         return modified_response
 
     return None

@@ -17,7 +17,7 @@ ADK provides the `DatabaseSessionService` that allows you to store session data 
 ## Project Structure
 
 ```
-5-database-session/
+6-database-session/
 │
 ├── todo_agent/               # Agent package
 │   ├── __init__.py             # Required for ADK to discover the agent

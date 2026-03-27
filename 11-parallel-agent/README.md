@@ -52,7 +52,7 @@ The architecture combines both parallel and sequential workflow patterns:
 ## Project Structure
 
 ```
-10-parallel-agent/
+11-parallel-agent/
 │
 ├── system_monitor_agent/          # Main System Monitor Agent package
 │   ├── __init__.py                # Package initialization

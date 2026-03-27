@@ -52,6 +52,8 @@ When using `output_schema`:
 4-structured-outputs/
 │
 ├── email_agent/                   # Email Generator Agent package
+│   ├── __init__.py
+│   ├── .env                       # Environment variables    
 │   └── agent.py                   # Agent definition with output schema
 │
 └── README.md                      # This documentation

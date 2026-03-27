@@ -16,6 +16,7 @@ Unlike simple conversational agents that forget previous interactions, stateful 
 5-sessions-n-runners/
 │
 ├── stateful_session.py      # Main example script
+├── .env                     # Environment variables
 │
 └── question_answering_agent/      # Agent implementation
     ├── __init__.py

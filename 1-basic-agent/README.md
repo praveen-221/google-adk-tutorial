@@ -16,11 +16,15 @@ Unlike deterministic workflow agents that follow predefined paths, an `LlmAgent`
 For ADK to discover and run your agents properly (especially with `adk web`), your project must follow a specific structure:
 
 ```
+
 parent_folder/
-    agent_folder/         # This is your agent's package directory [only a-z A-z 0-9 _ allowed and do not start with numerics]
-        __init__.py       # Must import agent.py
-        agent.py          # Must define root_agent
-        .env              # Environment variables
+├── agent_folder/          # This is your agent's package directory [only a-z A-z 0-9 _ allowed and do not start with numerics]
+│   ├── __init__.py        # Package initialization
+│   ├── agent.py           # Must define root_agent
+│   └── .env               # Environment variables
+│
+└── README.md              # This documentation
+
 ```
 
 ### Essential Components:

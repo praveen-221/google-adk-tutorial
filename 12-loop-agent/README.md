@@ -28,13 +28,13 @@ This demonstrates several key patterns:
 │   └── subagents/                      # Sub-agents folder
 │       ├── __init__.py                 # Sub-agents initialization
 │       │
-│       ├── post_generator_agent/       # Initial blog post generator agent
+│       ├── blog_generator_agent/       # Initial blog post generator agent
 │       │   └── agent.py
 │       │
-│       ├── post_refinement_agent/      # Blog post refinement agent
+│       ├── blog_refinement_agent/      # Blog post refinement agent
 │       │   └── agent.py
 │       │
-│       └──post_reviewer_agent/         # Blog post reviewer agent
+│       └── blog_reviewer_agent/         # Blog post reviewer agent
 │           ├── agent.py
 │           └── tools.py                # review tools
 │
@@ -106,5 +106,5 @@ The system will:
 ## Loop Termination
 
 The loop terminates in one of two ways:
-1. When the post meets all quality requirements (reviewer calls the exit_loop tool)
-2. After reaching the maximum number of iterations (10)
+1. When the post meets all quality requirements (calls the exit_loop tool)
+2. After reaching the maximum number of iterations

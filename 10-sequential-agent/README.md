@@ -57,15 +57,12 @@ The output of each sub-agent is stored in the session state using the `output_ke
 │       ├── __init__.py             # Sub-agents initialization
 │       │
 │       ├── validator/              # Lead validation agent
-│       │   ├── __init__.py
 │       │   └── agent.py
 │       │
 │       ├── scorer/                 # Lead scoring agent
-│       │   ├── __init__.py
 │       │   └── agent.py
 │       │
 │       └── recommender/            # Action recommendation agent
-│           ├── __init__.py
 │           └── agent.py
 │
 └── README.md                       # This documentation

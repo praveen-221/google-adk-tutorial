@@ -1,7 +1,7 @@
 google-adk
 yfinance
 psutil
-litellm
+litellm == 1.82.0
 google-generativeai
 python-dotenv
 aiosqlite
